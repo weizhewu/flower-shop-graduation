@@ -32,6 +32,12 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
+        <!--        阿里云-->
+        <dependency>
+            <groupId>cn.gjing</groupId>
+            <artifactId>tools-aliyun</artifactId>
+            <version>1.0.7</version>
+        </dependency>
 
         <dependency>
             <groupId>mysql</groupId>

@@ -18,3 +18,26 @@ spring:
             hibernate:
                 dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         show-sql: true
+tools:
+    aliyun:
+        # 用户key，在阿里云获取，此处为全局配置，短信和oss未单独设置则会默认调用此处配置
+        access-key: LTAI5tDLVTQ6PijLQ5vrGSCr
+        # 用户秘钥，在阿里云获取，此处为全局配置，短信和OSS都会默认调用此处的key
+        access-key-secret: SXtnIqEDo38WJ96lrk0FfAEpHSF5mp
+        oss:
+            # 用户key，在阿里云获取，此处优先级高于全局配置
+            access-key: LTAI5tDLVTQ6PijLQ5vrGSCr
+            # 用户秘钥，此处优先级高于全局配置
+            access-key-secret: SXtnIqEDo38WJ96lrk0FfAEpHSF5mp
+            # 节点, 前往阿里云查看
+            end-point: oss-cn-beijing.aliyuncs.com
+            # 存储空间,不存在会创建
+            bucket: flower-shop-wzw/flowers/flower-update/
+            # 最大连接数，默认1024
+            max-connections: 1024
+            # 最大空闲时间(毫秒)，默认60000
+            idle-time: 60000
+            # socket超时时间(毫秒)，默认50000
+            socket-timeout: 50000
+            # 连接超时时间(毫秒)，默认50000
+            connection-timeout: 50000

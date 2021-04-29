@@ -1,6 +1,5 @@
 <template>
 	<div>
-		
 		<el-table style="width: 100%" :data="flowers" :header-cell-style="{'text-align':'center'}"
 			:cell-style="{'text-align':'center'}">
 			<el-table-column label="图片">
@@ -28,11 +27,19 @@
 				</template>
 			</el-table-column>
 		</el-table>
-	
+
 		<router-view></router-view>
-		<el-dialog :visible.sync="flowerDialogVisible" :modal="flower" width="40%" center="center" :append-to-body="true"
-			>
+		<el-dialog :visible.sync="flowerDialogVisible" :model="flower" width="40%" center="center"
+			:append-to-body="true">
 			<el-form ref="formRef" label-width="90px" style="width: 95%;margin: 0 auto">
+				<el-form-item label="上传图片" ref="uploadElement" prop="imageUrl">
+					<el-input v-model="flower.image" v-if="false"></el-input>
+					<el-upload class="avatar-uploader" ref="upload" :show-file-list="false" action="/index/upload"
+						:before-upload="beforeUpload" :on-change="handleChange" :auto-upload="false" :data="flower">
+						<img style="width:100px" v-if="flower.image" :src="flower.image" class="avatar">
+						<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+					</el-upload>
+				</el-form-item>
 				<el-form-item label="花名" prop="name">
 					<el-input type="age" v-model="flower.name" autocomplete="off"></el-input>
 				</el-form-item>
@@ -70,6 +77,7 @@
 				flowers: [],
 				flower: '',
 				flowerDialogVisible: false,
+				flowerIndex: ''
 			}
 		},
 		methods: {
@@ -95,20 +103,28 @@
 				console.log("index:", index)
 				console.log("flower:", flower)
 			},
-			editOne(index,value){
-				
-				
+			editOne(index, value) {
 				this.flower = value
-				this.flowerDialogVisible=true
+				this.flowerIndex = index
+				this.flowerDialogVisible = true
 			},
-			confirm(){
+			confirm() {
 				this.flowerDialogVisible = false
 			},
-			cancel(){
+			cancel() {
+				this.flower = this.flowers[this.flowerIndex]
 				this.flowerDialogVisible = false
-			}
+			},
+			handleChange(file, fileList) {
+				console.log(file,fileList)
+				console.log('>>>>>file的情况：',file)
+			},
+			beforeUpload(file) {
+				console.log(file)
+				return true;
+			},
 		},
-		
+
 		created() {
 			this.getFlowers()
 		},
@@ -129,8 +145,7 @@
 				return y + '-' + MM + '-' + d + ' ';
 			}
 		},
-		computed:{
-		}
+		computed: {}
 
 	}
 </script>
